@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+# Pinned to keep builds reproducible. Bump deliberately, not automatically.
+env:
+  HUGO_VERSION: "0.162.1"
+
+permissions:
+  contents: read
+
+jobs:
+  lint-scss:
+    name: Lint SCSS (stylelint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
+
+  build:
+    name: Build site (Hugo extended)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Hugo extended
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+      - name: Build
+        run: hugo --gc --minify --baseURL "/"
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: public/
+          retention-days: 7
+
+  link-check:
+    name: Link check (lychee, offline)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: public
+      - name: Check internal links and assets
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --offline: verify that linked local files/assets exist, without
+          # hitting the network. Avoids flaky external checks and the
+          # intentional placeholder URLs in the demo content.
+          args: --offline --root-dir "${{ github.workspace }}/public" --no-progress "./public/**/*.html"
+          fail: true

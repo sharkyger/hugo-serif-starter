@@ -1,0 +1,12 @@
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+
+# Node / tooling
+/node_modules/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

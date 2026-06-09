@@ -1,0 +1,13 @@
+# Vendored Bootstrap source — not maintained by this project
+assets/scss/bootstrap/
+
+# Vendored third-party libraries (hamburgers, etc.)
+assets/scss/libraries/
+
+# Entry file contains Hugo Go-template interpolation ({{ ... }}) and is not valid standalone SCSS
+assets/scss/style.scss
+
+# Build output
+public/
+resources/
+node_modules/

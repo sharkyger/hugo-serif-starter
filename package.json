@@ -1,0 +1,16 @@
+{
+  "name": "hugo-serif-starter",
+  "version": "0.1.0",
+  "description": "A hardened, mobile-hero-fixed Hugo starter based on the Serif theme.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "lint:scss": "stylelint \"assets/scss/components/**/*.scss\" \"assets/scss/pages/**/*.scss\" \"assets/scss/_variables.scss\"",
+    "lint:scss:fix": "npm run lint:scss -- --fix",
+    "lint": "npm run lint:scss"
+  },
+  "devDependencies": {
+    "stylelint": "17.12.0",
+    "stylelint-config-standard-scss": "17.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+{{ if .Params.intro_image }}
+{{/* STARTER: image is order-2 on mobile (stacks BELOW the title) and order-md-2 on desktop
+     (right column). See README "Mobile hero" and _intro-image.scss for the regression note. */}}
+<div class="col-12 col-md-5 col-lg-6 order-2 order-md-2 position-relative">
+  <img
+    alt="{{ .Title }}"
+    class="intro-image{{ if .Params.intro_image_absolute }} intro-image-absolute{{ end }}{{ if .Params.intro_image_hide_on_mobile }} intro-image-hide-mobile{{ end }}"
+    src="{{ .Params.intro_image | relURL }}" 
+    style="{{ if .Params.intro_image_absolute_offset }}inset: {{ .Params.intro_image_absolute_offset }};{{end}}"
+  />
+</div>
+{{ end }}
