@@ -26,7 +26,7 @@ jobs:
       - run: npm run lint
 
   build:
-    name: Build site (Hugo extended ${{ env.HUGO_VERSION }})
+    name: Build site (Hugo extended)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
