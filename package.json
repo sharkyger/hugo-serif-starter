@@ -11,7 +11,7 @@
     "lint": "pnpm lint:scss"
   },
   "devDependencies": {
-    "stylelint": "17.12.0",
+    "stylelint": "17.13.0",
     "stylelint-config-standard-scss": "17.0.0"
   }
 }
