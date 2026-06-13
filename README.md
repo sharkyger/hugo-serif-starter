@@ -15,7 +15,7 @@ Before you start, make sure you have:
 | Tool | Version | Required for |
 | --- | --- | --- |
 | **Hugo (extended)** | **v0.158.0 or newer** | Building and serving the site. Built and tested on **v0.162.1 extended**. The extended build is mandatory (Sass/SCSS). |
-| Node.js | v20 or newer | Optional — only for running stylelint locally / in CI. |
+| Node.js | **v22.13 or newer** | Optional — only for running stylelint locally / in CI (required by the pinned pnpm 11). |
 | pnpm (via Corepack) | v11 (pinned in `package.json`) | Optional — dev tooling only, but **recommended over npm** if you install it: pnpm enforces the supply-chain freshness hold (`minimumReleaseAge`) and the pinned lockfile that npm would bypass. `corepack enable` activates the pinned version; the site itself has zero npm dependencies. |
 
 Install Hugo extended: <https://gohugo.io/installation/>. Confirm the **extended**

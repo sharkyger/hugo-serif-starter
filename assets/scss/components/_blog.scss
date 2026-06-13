@@ -6,7 +6,10 @@
   background-color: $white;
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgb(50, 50, 93, 8%), 0 5px 15px rgb(0, 0, 0, 5%);
+
+  // rgba() with decimal alpha — the libsass build in Hugo extended (CI) rejects
+  // the modern 4-arg rgb()/percentage-alpha notation stylelint would prefer.
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.08), 0 5px 15px rgba(0, 0, 0, 0.05);
 
   .blog-card-image {
     display: block;
