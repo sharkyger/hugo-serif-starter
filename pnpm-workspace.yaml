@@ -1,0 +1,7 @@
+# pnpm settings (https://pnpm.io/settings).
+#
+# Supply-chain freshness hold: refuse to install any package version published
+# less than this many minutes ago — newly published versions are when most
+# supply-chain attacks land. Set explicitly rather than relying on the default
+# (pnpm v11 defaults this to 1440); raise it for a longer hold if desired.
+minimumReleaseAge: 1440

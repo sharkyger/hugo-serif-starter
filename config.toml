@@ -50,7 +50,18 @@ title = "Serif Starter"
     summary_large_truncate = 120 # How many characters to include in the summary of the team bios (large layout) before truncating
 
   [params.footer]
-    copyright_text = '&copy; Your Name'
+    # Just your name / brand — the current year is prepended automatically: "© <year> | <name>".
+    copyright_text = 'Your Name'
+
+  [params.blog]
+    # Optional, consistent call-to-action shown at the bottom of every blog post.
+    # Set enable = true and edit the copy to turn it on.
+    [params.blog.cta]
+      enable = false
+      heading = 'Want to work together?'
+      text = 'Get in touch and let us know how we can help.'
+      button_text = 'Contact us'
+      button_link = 'contact'
 
 [menu]
   # Main Menu
@@ -65,14 +76,19 @@ title = "Serif Starter"
     weight = 2
 
   [[menu.main]]
+    name = "Blog"
+    url = "/blog/"
+    weight = 3
+
+  [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 3
+    weight = 4
 
   [[menu.main]]
     name = "Contact"
     url = "/contact/"
-    weight = 4
+    weight = 5
 
   # Footer Menu
   [[menu.footer]]

@@ -1,3 +1,4 @@
 email: 'hello@example.com'
-phone: '1800 123 000'
+phone: '1800 123 000'           # human-readable, shown on the page
+phone_tel: '+611800123000'      # international format, no spaces — used for the tel: link href
 contact_button_link: 'contact'

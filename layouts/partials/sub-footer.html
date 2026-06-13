@@ -7,7 +7,7 @@
             {{ partial "social.html" . }}
           {{ end }}
           {{ with .Site.Params.footer.copyright_text }}
-            <div class="copyright">{{ . | safeHTML }}</div>
+            <div class="copyright">&copy; {{ now.Year }} | {{ . | safeHTML }}</div>
           {{ end }}
         </div>
       </div>
