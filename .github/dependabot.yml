@@ -1,0 +1,18 @@
+version: 2
+updates:
+  # Keep the SHA-pinned GitHub Actions current. Dependabot reads the `# vX.Y.Z`
+  # comment next to each pinned SHA and bumps both together.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+
+  # Dev tooling (pnpm devDependencies: stylelint). The site itself is zero-dep.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"

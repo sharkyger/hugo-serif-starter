@@ -24,6 +24,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Footer copyright now renders `© <current year> | <name>` automatically;
   `[params.footer].copyright_text` is just the name/brand.
+- CI hardening: all GitHub Actions are now pinned to commit SHAs (with `# vX.Y.Z`
+  comments) instead of mutable tags, and a Dependabot config keeps the actions
+  and dev dependencies current. CI runs on Node 22 (required by the pinned pnpm).
 - **Dev tooling moved from npm to pnpm** (Corepack-managed): pinned
   `packageManager` (pnpm 11.5.2 with integrity hash) in `package.json`, a
   `pnpm-workspace.yaml` with an explicit `minimumReleaseAge` supply-chain
