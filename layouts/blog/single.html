@@ -1,0 +1,23 @@
+{{ define "body_classes" }}page-blog-single{{ end }}
+
+{{ define "main" }}
+<div class="container pb-6 pt-6 pt-md-14 pb-md-14">
+  <div class="row justify-content-start">
+    <div class="col-12 col-md-8">
+      <article class="blog-post">
+        {{ if .Params.feature_image }}
+        <img class="blog-post-image img-fluid mb-3" src="{{ .Params.feature_image | relURL }}" alt="{{ .Title }}" />
+        {{ end }}
+        <h1 class="title">{{ .Title }}</h1>
+        <p class="blog-post-meta">{{ .Date.Format "January 2, 2006" }}</p>
+        <div class="content">{{ .Content }}</div>
+        <div class="blog-post-back mt-4">
+          <a class="button" href="{{ .CurrentSection.RelPermalink }}">&larr; Back to all posts</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+{{ partial "blog-cta.html" . }}
+{{ end }}

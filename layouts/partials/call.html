@@ -1,7 +1,13 @@
 <div class="call">
   <div class="call-box-top">
     {{ if hugo.Data.contact.phone }}
-        <div class="call-phone"><strong>Phone: </strong> {{ hugo.Data.contact.phone }} </div>
+        <div class="call-phone"><strong>Phone: </strong>
+          {{ with hugo.Data.contact.phone_tel }}
+            <a href="tel:{{ . }}">{{ hugo.Data.contact.phone }}</a>
+          {{ else }}
+            {{ hugo.Data.contact.phone }}
+          {{ end }}
+        </div>
     {{ end }}
     {{ if hugo.Data.contact.email }}
     <div class="call-email"><strong>Email: </strong>

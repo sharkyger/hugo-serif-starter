@@ -1,0 +1,15 @@
+<article class="blog-card">
+  {{ if .Params.feature_image }}
+  <a class="blog-card-image" href="{{ .RelPermalink }}">
+    <img src="{{ .Params.feature_image | relURL }}" alt="{{ .Title }}" loading="lazy" />
+  </a>
+  {{ end }}
+  <div class="blog-card-body">
+    <p class="blog-card-meta">{{ .Date.Format "January 2, 2006" }}</p>
+    <h2 class="blog-card-title">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h2>
+    <p class="blog-card-teaser">{{ .Summary | plainify | htmlUnescape }}</p>
+    <a class="blog-card-readmore" href="{{ .RelPermalink }}">Read the article &rarr;</a>
+  </div>
+</article>

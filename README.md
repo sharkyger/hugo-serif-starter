@@ -8,6 +8,22 @@ by Robert Austin (Zerostatic Themes), with the one fix that vertical needs most:
 
 ---
 
+## System requirements
+
+Before you start, make sure you have:
+
+| Tool | Version | Required for |
+| --- | --- | --- |
+| **Hugo (extended)** | **v0.158.0 or newer** | Building and serving the site. Built and tested on **v0.162.1 extended**. The extended build is mandatory (Sass/SCSS). |
+| Node.js | **v22.13 or newer** | Optional — only for running stylelint locally / in CI (required by the pinned pnpm 11). |
+| pnpm (via Corepack) | v11 (pinned in `package.json`) | Optional — dev tooling only, but **recommended over npm** if you install it: pnpm enforces the supply-chain freshness hold (`minimumReleaseAge`) and the pinned lockfile that npm would bypass. `corepack enable` activates the pinned version; the site itself has zero npm dependencies. |
+
+Install Hugo extended: <https://gohugo.io/installation/>. Confirm the **extended**
+edition with `hugo version` (the output must contain `+extended`). **Hugo alone is
+enough to build, serve, and deploy** — the Node/pnpm row is optional dev tooling.
+
+---
+
 ## Why this starter
 
 Stock Serif treats the hero image as decorative and **hides it on phones**
@@ -90,24 +106,58 @@ no need to touch templates for a normal rebrand.
 | Brand colors | `config.toml` → `[params.colors]` | `primary`, `black`, `white`, `white_offset`, `grey` — compiled into the CSS |
 | Fonts | `config.toml` → `[params.fonts]` | `google_fonts` link + `heading` / `base` family names |
 | Logo | `config.toml` → `[params.logo]` + `static/images/logo/` | Separate desktop/mobile SVGs and heights |
-| Footer copyright | `config.toml` → `[params.footer].copyright_text` | HTML allowed |
-| Navigation | `config.toml` → `[menu]` | `main` and `footer` menus |
+| Footer copyright | `config.toml` → `[params.footer].copyright_text` | Your name/brand only — `© <current year> \| <name>` is rendered automatically (HTML allowed) |
+| Navigation | `config.toml` → `[menu]` | `main` and `footer` menus, ordered by `weight`; add/remove/reorder anytime |
 | Hero photo & headline | `content/_index.md` | `intro_image`, plus the markdown body is the H1/intro |
-| Contact details | `data/contact.yaml` | Phone, email, contact-button link |
-| Social links | `data/social.json` | Replace the `your-username` / `your-handle` placeholders |
+| Contact details | `data/contact.yaml` | `email`, `phone` (human-readable display), `phone_tel` (international `+countrycode…`, no spaces — used for the `tel:` link) |
+| Social links | `data/social.json` | `name`, `link`, `image` per entry — shown as icons (the `name` is the title/alt). Replace the `your-username` / `your-handle` placeholders |
 | Feature cards | `data/features.json` | Title, description, icon path |
+| Blog | `content/blog/` + `[params.blog.cta]` | See [Blog](#blog) below |
 | Services / Team / About | `content/services/`, `content/team/`, `content/about.md` | Standard Hugo content |
 
 > Keep image filenames free of spaces (use `kebab-case`) — spaces become `%20`
 > in URLs and break on some hosts.
 
+### Blog
+
+The starter includes a blog section at `/blog/`.
+
+- **Add a post** — drop a Markdown file into `content/blog/` (or run
+  `hugo new blog/my-post.md` to scaffold from the archetype). Posts are listed
+  **newest first** automatically.
+- **Teaser vs. body** — text above the `<!--more-->` marker is the teaser shown
+  on the list; everything below is the full article.
+- **Images** — set `feature_image` in the post front matter (e.g.
+  `feature_image: "images/your-photo.jpg"`). It appears as the preview picture on
+  the list card and, optionally, at the top of the article. Leave it empty to
+  omit the image.
+- **List → article → back** — each list card shows the image, date, title,
+  teaser, and a **"Read the article"** link to the post; every post ends with a
+  **"← Back to all posts"** link to the list.
+- **Optional CTA** — a consistent call-to-action can be shown at the bottom of
+  every post. Enable and edit the copy in `config.toml` under `[params.blog.cta]`
+  (`enable`, `heading`, `text`, `button_text`, `button_link`); it is **off by
+  default**.
+- **Navigation** — `Blog` is in the main menu (`config.toml` → `[[menu.main]]`).
+  Remove or reorder it there like any other menu item.
+
 ---
 
 ## Install
 
-You need the **Hugo extended** binary (the SCSS pipeline requires it). The Node
-tooling below is only needed if you want to run the SCSS linter locally; it is
-not required to build or serve the site.
+Make sure you have **Hugo extended** installed (see
+[System requirements](#system-requirements) above).
+
+**Dev tooling is optional.** You don't need Node or pnpm to build, serve, or
+deploy the site — Hugo does all of that on its own. The tooling below is only for
+running the SCSS linter while editing the theme.
+
+**If you do install it, use pnpm** (it's managed by
+[Corepack](https://nodejs.org/api/corepack.html) — no global install). pnpm
+enforces this project's supply-chain freshness hold (`minimumReleaseAge`) and a
+pinned, reproducible, integrity-checked toolchain. Running `npm install` instead
+bypasses those protections and drifts from the committed lockfile, so it's not
+recommended.
 
 ```bash
 # 1. Get the code
@@ -115,7 +165,8 @@ git clone https://github.com/sharkyger/hugo-serif-starter.git
 cd hugo-serif-starter
 
 # 2. (optional) install lint tooling
-npm install
+corepack enable        # activates the pinned pnpm version
+pnpm install           # respects pnpm-lock.yaml + the minimumReleaseAge hold
 
 # 3. Run it
 hugo server
@@ -124,22 +175,10 @@ hugo server
 Lint and build commands:
 
 ```bash
-npm run lint          # stylelint over the project SCSS
-npm run lint:scss:fix # auto-fix what stylelint can
-hugo --gc --minify    # production build into ./public
+pnpm run lint          # stylelint over the project SCSS
+pnpm run lint:scss:fix # auto-fix what stylelint can
+hugo --gc --minify     # production build into ./public
 ```
-
----
-
-## System requirements
-
-| Tool | Version | Required for |
-| --- | --- | --- |
-| **Hugo (extended)** | **v0.158.0 or newer** | Building and serving the site. Built and tested on **v0.162.1 extended**. The extended build is mandatory (Sass/SCSS). |
-| Node.js + npm | v20 or newer | Optional — only for running stylelint locally / in CI. |
-
-Install Hugo extended: <https://gohugo.io/installation/>. Confirm the **extended**
-edition with `hugo version` (the output must contain `+extended`).
 
 ---
 

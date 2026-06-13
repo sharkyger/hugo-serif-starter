@@ -4,6 +4,45 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **Blog** section at `/blog/`: a newest-first list of cards (preview image,
+  date, title, teaser, "Read the article" link) and a single-post view with an
+  optional top `feature_image`, full article, and a "← Back to all posts" link.
+  Includes an optional, consistent per-post call-to-action (`[params.blog.cta]`,
+  off by default), a `blog` archetype, and a `Blog` main-menu entry. New files:
+  `content/blog/`, `layouts/blog/{list,summary,single}.html`,
+  `layouts/partials/blog-cta.html`, `archetypes/blog.md`,
+  `assets/scss/components/_blog.scss`.
+- **Linked phone number** on the contact box: `data/contact.yaml` gains a
+  `phone_tel` field (international, no spaces) used for a `tel:` link, while the
+  visible text stays the human-readable `phone`.
+
+### Changed
+
+- Footer copyright now renders `© <current year> | <name>` automatically;
+  `[params.footer].copyright_text` is just the name/brand.
+- CI hardening: all GitHub Actions are now pinned to commit SHAs (with `# vX.Y.Z`
+  comments) instead of mutable tags, and a Dependabot config keeps the actions
+  and dev dependencies current. CI runs on Node 22 (required by the pinned pnpm).
+- **Dev tooling moved from npm to pnpm** (Corepack-managed): pinned
+  `packageManager` (pnpm 11.5.2 with integrity hash) in `package.json`, a
+  `pnpm-workspace.yaml` with an explicit `minimumReleaseAge` supply-chain
+  freshness hold, a committed `pnpm-lock.yaml` (replacing `package-lock.json`),
+  and CI switched to `corepack enable` + `pnpm install --frozen-lockfile`. The
+  Hugo site itself remains zero-dependency.
+
+### Fixed
+
+- **Contact box no longer missing**: the `contact` layout was never applied
+  (the page fell back to `_default/single.html`), so the `.call` box with phone
+  and email was absent. Moved `layouts/page/contact.html` →
+  `layouts/_default/contact.html` so the layout resolves and the box renders.
+- Social links now use `target="_blank"` with `rel="noopener noreferrer"`
+  (previously `target="blank"`, a named tab, with no `rel`).
+
 ## [0.1.0] - 2026-06-08
 
 Initial release. A standalone Hugo starter derived from the MIT-licensed
@@ -50,4 +89,5 @@ Austin (Zerostatic Themes), hardened for personal-brand sites.
 - Retains Robert Austin's upstream MIT copyright and notice; adds Sharky's
   copyright line. Project remains MIT.
 
+[Unreleased]: https://github.com/sharkyger/hugo-serif-starter/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/sharkyger/hugo-serif-starter/releases/tag/v0.1.0

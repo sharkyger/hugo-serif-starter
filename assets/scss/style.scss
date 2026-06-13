@@ -42,6 +42,7 @@ $font-family-heading: {{ .Site.Params.fonts.heading }}, serif, -apple-system;
 @import 'components/strip';
 @import 'components/feature';
 @import 'components/social';
+@import 'components/blog';
 
 // Pages
 @import 'pages/home';
