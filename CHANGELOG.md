@@ -4,7 +4,7 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.2.0] - 2026-06-14
 
 ### Added
 
@@ -33,6 +33,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   freshness hold, a committed `pnpm-lock.yaml` (replacing `package-lock.json`),
   and CI switched to `corepack enable` + `pnpm install --frozen-lockfile`. The
   Hugo site itself remains zero-dependency.
+- Bumped the SHA-pinned CI dependencies (via Dependabot): `actions/checkout` v6,
+  `actions/setup-node` v6, `actions/upload-artifact` v7, `actions/download-artifact`
+  v8, and `stylelint` 17.13.0.
 
 ### Fixed
 
@@ -42,6 +45,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `layouts/_default/contact.html` so the layout resolves and the box renders.
 - Social links now use `target="_blank"` with `rel="noopener noreferrer"`
   (previously `target="blank"`, a named tab, with no `rel`).
+- Feature cards now emit a meaningful `alt` (used `.Title`, which is empty for a
+  data map; corrected to `.title`) — previously `alt=" logo"`.
+- Corrected an invalid `font-width: bold` declaration to `font-weight: bold` in
+  the content styles.
 
 ## [0.1.0] - 2026-06-08
 
@@ -89,5 +96,6 @@ Austin (Zerostatic Themes), hardened for personal-brand sites.
 - Retains Robert Austin's upstream MIT copyright and notice; adds Sharky's
   copyright line. Project remains MIT.
 
-[Unreleased]: https://github.com/sharkyger/hugo-serif-starter/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/sharkyger/hugo-serif-starter/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/sharkyger/hugo-serif-starter/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/sharkyger/hugo-serif-starter/releases/tag/v0.1.0
